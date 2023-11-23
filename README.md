@@ -34,3 +34,5 @@
 「また会えるよね」って 声にならない声
 無限に膨張する銀河の星の粒のように
 指の隙間を零れた
+
+This is for the profile page. Beware of internal conflicts!
