@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/home/about', function () {
         return view('user.about');
     });
+
+    // Check Profile User
+    Route::get('/home/profile', function () {
+        $user = Auth::user();
+        return view('user.profilepage');
+    });
+
     Route::get('/home/shop', [UserController::class, 'shop'])->name('shop');
     Route::post('/home/shopping-cart', [UserController::class, 'store'])->name('add_to_shopping-cart');
     Route::get('/home/shopping-cart', [UserController::class, 'index'])->name('shopping-cart.get');
@@ -64,6 +73,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('home/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
 });
 
+
+
+
+
+// Redundant. The default Laravel Breeze profile stuff. Modify this possibly???
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

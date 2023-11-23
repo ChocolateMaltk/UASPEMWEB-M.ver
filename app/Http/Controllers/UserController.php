@@ -119,7 +119,6 @@ class UserController extends Controller
             } else {
                 $quantity = 1;
                 $totalPrice = $product->price;
-
                 $shoppingCart = new ShoppingCart();
                 $shoppingCart->idUser     = $idUser;
                 $shoppingCart->idProduct  = $idProduct;
@@ -209,4 +208,6 @@ class UserController extends Controller
         // echo $request->checkOut;
         return view('user.productdetail');
     }
+
+
 }

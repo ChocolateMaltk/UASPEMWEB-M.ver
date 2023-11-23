@@ -62,3 +62,8 @@ footer.bg-primary-gradient {
 .banner-text-shop {
     text-align: center;
 }
+
+.sticky-footer{
+    position: sticky;
+    top: 100%;
+}

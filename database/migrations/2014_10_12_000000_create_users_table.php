@@ -15,11 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->mediumText('socials')->nullable();
+            $table->longText('alamat')->nullable();
+            $table->string('negara')->nullable();
+            $table->integer('kode_pos')->nullable();
+            $table->mediumText('nomor_hp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role_id')->default(2);
+            $table->integer('role_id')->default(2);
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 
