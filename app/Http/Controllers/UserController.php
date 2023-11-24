@@ -148,7 +148,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         if ($user) {
-            $user->update([
+            $user->update([ // Gw gak tahu kenapa inteliphense mark ini sebagai undefined method, tapi pas gw jalan ngerun bjir.
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'socials' => $request->input('socials'),
@@ -156,6 +156,7 @@ class UserController extends Controller
                 'negara' => $request->input('negara'),
                 'kode_pos' => $request->input('kode_pos'),
                 'nomor_hp' => $request->input('nomor_hp'),
+                'profile_icon_id' => $request->input('profile_icon_id'),
             ]);
 
             return redirect()->route('userProfile')->with('success', 'Profile updated successfully!');
