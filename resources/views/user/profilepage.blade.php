@@ -29,9 +29,29 @@
                         <li class="nav-item"><a class="nav-link" href="/home/shop">Shop</a></li>
                         <li class="nav-item"><a class="nav-link" href="/home/about">About</a></li>
                     </ul>
-                    <a href="/home/profile" class="nav-link active me-2 rounded-circle">
-                        <img src="https://via.placeholder.com/50" alt="Profile Page" class="rounded-circle">
-                    </a>
+                    @auth
+                        @php
+                            $profileIconId = auth()->user()->profile_icon_id;
+                        @endphp
+
+                        <a href="/home/profile" class="nav-link active me-2 rounded-circle">
+                            @switch($profileIconId)
+                                @case('F')
+                                    <img src="{{ asset('img/profileicons/placeholderF.png') }}" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                                    @break
+
+                                @case('M')
+                                    <img src="{{ asset('img/profileicons/placeholderM.png') }}" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                                    @break
+
+                                @case('C')
+                                    <img src="{{ asset('img/profileicons/placeholderC.png') }}" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                                    @break
+                                @default
+                                    <img src="https://via.placeholder.com/50/default" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                            @endswitch
+                        </a>
+                    @endauth
                     <a href="/home/shopping-cart">
                         <span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon">
                             <!-- Your existing shopping cart icon -->
@@ -77,7 +97,29 @@
             <h1 class="text-center"><strong>Profile</strong></h1>
             <div class="row justify-content-center">
                 <div>
-                    <img src="https://via.placeholder.com/256" alt="Profile Page" class="rounded-circle">
+                    @auth
+                        @php
+                            $profileIconId = auth()->user()->profile_icon_id;
+                        @endphp
+
+                        <p>
+                            @switch($profileIconId)
+                                @case('F')
+                                    <img src="{{ asset('img/profileicons/placeholderF.png') }}" alt="Profile Page" class="rounded-circle border border-5" style="height: 256px; width: 256px;">
+                                    @break
+
+                                @case('M')
+                                    <img src="{{ asset('img/profileicons/placeholderM.png') }}" alt="Profile Page" class="rounded-circle border border-5" style="height: 256px; width: 256px;">
+                                    @break
+
+                                @case('C')
+                                    <img src="{{ asset('img/profileicons/placeholderC.png') }}" alt="Profile Page" class="rounded-circle border border-5" style="height: 256px; width: 256px;">
+                                    @break
+                                @default
+                                    <img src="https://via.placeholder.com/50/default" alt="Profile Page" class="rounded-circle" style="height: 256px; width: 256px;">
+                            @endswitch
+                        </p>
+                    @endauth
                 </div>
             </div>
             <div class="mt-4"> <!-- Removed unnecessary classes from the parent div -->

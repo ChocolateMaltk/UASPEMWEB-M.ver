@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'negara',
         'kode_pos',
         'nomor_hp',
+        'profile_icon_id',
     ];
 
     /**

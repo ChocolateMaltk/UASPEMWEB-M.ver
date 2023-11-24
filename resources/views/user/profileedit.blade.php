@@ -29,9 +29,29 @@
                         <li class="nav-item"><a class="nav-link" href="/home/shop">Shop</a></li>
                         <li class="nav-item"><a class="nav-link" href="/home/about">About</a></li>
                     </ul>
-                    <a href="/home/profile" class="nav-link active me-2 rounded-circle">
-                        <img src="https://via.placeholder.com/50" alt="Profile Page" class="rounded-circle">
-                    </a>
+                    @auth
+                        @php
+                            $profileIconId = auth()->user()->profile_icon_id;
+                        @endphp
+
+                        <a href="/home/profile" class="nav-link active me-2 rounded-circle">
+                            @switch($profileIconId)
+                                @case('F')
+                                    <img src="{{ asset('img/profileicons/placeholderF.png') }}" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                                    @break
+
+                                @case('M')
+                                    <img src="{{ asset('img/profileicons/placeholderM.png') }}" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                                    @break
+
+                                @case('C')
+                                    <img src="{{ asset('img/profileicons/placeholderC.png') }}" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                                    @break
+                                @default
+                                    <img src="https://via.placeholder.com/50/default" alt="Profile Page" class="rounded-circle" style="height: 50px; width: 50px;">
+                            @endswitch
+                        </a>
+                    @endauth
                     <a href="/home/shopping-cart">
                         <span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon">
                             <!-- Your existing shopping cart icon -->
@@ -75,48 +95,78 @@
         <!-- Content -->
         <div class="border-md bg-white m-4 p-4 d-flex flex-column align-items-center rounded">
             <h1 class="text-center">Editing <strong>{{ auth()->user()->name }}'s Profile</strong></h1>
-            <div class="row justify-content-center">
-                <div>
-                    <img src="https://via.placeholder.com/256" alt="Profile Page" class="rounded-circle">
-                </div>
-            </div>
             <div class="mt-4">
-    <form method="POST" action="{{ route('update-profile') }}">
-        @csrf
-        @method('PUT')
-            <ul class="list-unstyled text-start">
-                <li>
-                    Name
-                    <input type="text" name="name" value="{{ auth()->user()->name }}" required>
-                </li>
-                <li>
-                    Email
-                    <input type="email" name="email" value="{{ auth()->user()->email }}" required>
-                </li>
-                <li>
-                    Socials
-                    <input type="text" name="socials" value="{{ auth()->user()->socials }}">
-                </li>
-                <li>
-                    Address
-                    <input type="text" name="alamat" value="{{ auth()->user()->alamat }}">
-                </li>
-                <li>
-                    Country
-                    <input type="text" name="negara" value="{{ auth()->user()->negara }}">
-                </li>
-                <li>
-                    Postal Code
-                    <input type="text" name="kode_pos" value="{{ auth()->user()->kode_pos }}">
-                </li>
-                <li>
-                    Phone Number
-                    <input type="text" name="nomor_hp" value="{{ auth()->user()->nomor_hp }}">
-                </li>
-            </ul>
+                <form method="POST" action="{{ route('update-profile') }}">
+                    @csrf
+                    @method('PUT')
 
-            <button type="submit" class="btn btn-primary shadow" role="button">Save Changes</button>
-        </form>
+                    <ul class="list-unstyled text-start">
+                        <li>
+                        <div class="d-flex justify-content-between">
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="option1" name="profile_icon_id" value="F" {{ auth()->user()->profile_icon_id === 'F' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="option1">
+                                    <img src="{{ asset('img/profileicons/placeholderF.png') }}" alt="Option 1" class="img-thumbnail">
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="option2" name="profile_icon_id" value="M" {{ auth()->user()->profile_icon_id === 'M' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="option2">
+                                    <img src="{{ asset('img/profileicons/placeholderM.png') }}" alt="Option 2" class="img-thumbnail">
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="option3" name="profile_icon_id" value="C" {{ auth()->user()->profile_icon_id === 'C' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="option3">
+                                    <img src="{{ asset('img/profileicons/placeholderC.png') }}" alt="Option 3" class="img-thumbnail">
+                                </label>
+                            </div>
+                        </div>
+                        </li>
+
+                        <li>
+                            Name
+                            <input type="text" name="name" value="{{ auth()->user()->name }}" required>
+                        </li>
+
+                        <li>
+                            Email
+                            <input type="email" name="email" value="{{ auth()->user()->email }}" required>
+                        </li>
+
+                        <li>
+                            Socials
+                            <input type="text" name="socials" value="{{ auth()->user()->socials }}">
+                        </li>
+
+                        <li>
+                            Address
+                            <input type="text" name="alamat" value="{{ auth()->user()->alamat }}">
+                        </li>
+
+                        <li>
+                            Country
+                            <input type="text" name="negara" value="{{ auth()->user()->negara }}">
+                        </li>
+
+                        <li>
+                            Postal Code
+                            <input type="text" name="kode_pos" value="{{ auth()->user()->kode_pos }}">
+                        </li>
+
+                        <li>
+                            Phone Number
+                            <input type="text" name="nomor_hp" value="{{ auth()->user()->nomor_hp }}">
+                        </li>
+
+                        <li>
+                            <button type="submit" class="btn btn-primary shadow" role="button">Save Changes</button>
+                        </li>
+                    </ul>
+                </form>
+
     </div>
 
     @else
@@ -155,8 +205,20 @@
             </div>
         </div>
     </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const profileImageLinks = document.querySelectorAll('.nav-link.active');
+                const hiddenInput = document.getElementById('profile_icon_id'); // Adjust the ID as needed
 
-   
+                profileImageLinks.forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        // Extract profile icon ID from the image source
+                        const profileIconId = link.querySelector('img').src.split('/').pop().split('.')[0];
+                        hiddenInput.value = profileIconId;
+                    });
+                });
+            });
+        </script>
 </body>
 
 </html>
