@@ -1,38 +1,11 @@
-# UASPEMWEB
+#UAS PEMWEB#
 
- どこまでも続くような青の季節は
-四つ並ぶ眼の前を遮るものは何もない
-アスファルト 蝉時雨を反射して
-きみという沈黙が聞こえなくなる
-この日々が色褪せる
-僕と違うきみの匂いを知ってしまっても
-置き忘れてきた永遠の底に
-今でも青が棲んでいる
-今でも青は澄んでいる
-どんな祈りも言葉も
-近づけるのに 届かなかった
-まるで 静かな恋のような
-頬を伝った夏のような色のなか
-きみを呪う言葉がずっと喉の奥につかえてる
-「また会えるよね」って 声にならない声
-昼下がり じめつく風の季節は
-想い馳せる まだ何者でもなかった僕らの肖像
-何もかも分かち合えたはずだった
-あの日から少しずつ
-きみと違う僕という呪いが肥っていく
-きみの笑顔の奥の憂いを (憂いを)
-見落としたこと 悔やみ尽くして
-徒花と咲いて散っていくきみに
-さよなら
-今でも青が棲んでいる
-今でも青は澄んでいる
-どんな祈りも言葉も
-近づけるのに 届かなかった
-まるで 静かな恋のような
-頬を伝った夏のような色のなか
-きみを呪う言葉がずっと喉の奥につかえてる
-「また会えるよね」って 声にならない声
-無限に膨張する銀河の星の粒のように
-指の隙間を零れた
 
-This is for the profile page. Beware of internal conflicts!
+## This is for the profile page. Beware of internal conflicts! ##
+
+Ini harusnya udah bisa update, detail user sama foto profil, ya meskipun masih pake placeholder ya,
+
+### MINUS / KURANGNYA ###
+1. Masih gunain Navbar lama, blm pake yang punya gapin
+2. UI nya gitu lah seadanya, setidaknya backendnya berjalan lah ya wkwkwkwk
+3. Masih gunain mailpit untuk verifikasi, jadi user harus terautentikasi untuk ngedit profil.
