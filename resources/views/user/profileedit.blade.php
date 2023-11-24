@@ -74,25 +74,51 @@
     @auth
         <!-- Content -->
         <div class="border-md bg-white m-4 p-4 d-flex flex-column align-items-center rounded">
-            <h1 class="text-center"><strong>Profile</strong></h1>
+            <h1 class="text-center">Editing <strong>{{ auth()->user()->name }}'s Profile</strong></h1>
             <div class="row justify-content-center">
                 <div>
                     <img src="https://via.placeholder.com/256" alt="Profile Page" class="rounded-circle">
                 </div>
             </div>
-            <div class="mt-4"> <!-- Removed unnecessary classes from the parent div -->
-                <ul class="list-unstyled text-start"> <!-- Apply text-start directly to ul -->
-                    <li>Name {{ auth()->user()->name }} </li>
-                    <li>Email {{ auth()->user()->email }} </li>
-                    <li>Socials {{ auth()->user()->socials ?? 'No socials set.'}}</li>
-                    <li>Address {{auth()->user()->alamat ?? 'Location unknown'}}</li>
-                    <li>Country {{auth()->user()->negara ?? 'No country set'}}</li>
-                    <li>Postal Code {{auth()->user()->kode_pos ?? 'No postal code set'}}</li>
-                    <li>Phone Number {{auth()->user()->nomor_hp ?? 'There is no number!'}}</li>
-                </ul>
-            </div>
-                <a href="{{ route('edit-profile') }}" class="btn btn-primary shadow" role="button">Edit</a>
-        </div>
+            <div class="mt-4">
+    <form method="POST" action="{{ route('update-profile') }}">
+        @csrf
+        @method('PUT')
+            <ul class="list-unstyled text-start">
+                <li>
+                    Name
+                    <input type="text" name="name" value="{{ auth()->user()->name }}" required>
+                </li>
+                <li>
+                    Email
+                    <input type="email" name="email" value="{{ auth()->user()->email }}" required>
+                </li>
+                <li>
+                    Socials
+                    <input type="text" name="socials" value="{{ auth()->user()->socials }}">
+                </li>
+                <li>
+                    Address
+                    <input type="text" name="alamat" value="{{ auth()->user()->alamat }}">
+                </li>
+                <li>
+                    Country
+                    <input type="text" name="negara" value="{{ auth()->user()->negara }}">
+                </li>
+                <li>
+                    Postal Code
+                    <input type="text" name="kode_pos" value="{{ auth()->user()->kode_pos }}">
+                </li>
+                <li>
+                    Phone Number
+                    <input type="text" name="nomor_hp" value="{{ auth()->user()->nomor_hp }}">
+                </li>
+            </ul>
+
+            <button type="submit" class="btn btn-primary shadow" role="button">Save Changes</button>
+        </form>
+    </div>
+
     @else
         <div>Please login/register first!</div>
     @endauth

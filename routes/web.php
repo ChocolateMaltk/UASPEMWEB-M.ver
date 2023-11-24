@@ -52,7 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/home/profile', function () {
         $user = Auth::user();
         return view('user.profilepage');
-    });
+    })->name('userProfile');
+
+    // Edit Profile User
+    Route::get('/home/profile/edit', [UserController::class, 'editProfile'])->name('edit-profile');
+    Route::put('/home/profile/edit', [UserController::class, 'updateProfile'])->name('update-profile');
+
 
     Route::get('/home/shop', [UserController::class, 'shop'])->name('shop');
     Route::post('/home/shopping-cart', [UserController::class, 'store'])->name('add_to_shopping-cart');

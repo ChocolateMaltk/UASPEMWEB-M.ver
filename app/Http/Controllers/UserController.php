@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ShoppingCart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -129,6 +130,40 @@ class UserController extends Controller
             return redirect('/home/shop');
         }
     }
+
+
+    public function editProfile()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            return view('user.profileedit', compact('user'));
+        } else {
+            return redirect()->route('login')->with('error', 'User not authenticated.');
+        }
+    }
+
+     public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $user->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'socials' => $request->input('socials'),
+                'alamat' => $request->input('alamat'),
+                'negara' => $request->input('negara'),
+                'kode_pos' => $request->input('kode_pos'),
+                'nomor_hp' => $request->input('nomor_hp'),
+            ]);
+
+            return redirect()->route('userProfile')->with('success', 'Profile updated successfully!');
+        } else {
+            return redirect()->route('login')->with('error', 'User not authenticated.');
+        }
+    }
+
 
     /**
      * Display the specified resource.
